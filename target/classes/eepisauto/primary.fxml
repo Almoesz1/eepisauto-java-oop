@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="650.0" prefWidth="900.0" spacing="15.0" style="-fx-background-color: #f4f6f8;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eepisauto.PrimaryController">
+   <padding>
+      <Insets bottom="20.0" left="25.0" right="25.0" top="20.0" />
+   </padding>
+   <children>
+      <!-- Judul Aplikasi -->
+      <Label text="EEPIS AUTO - VIP DEALERSHIP SYSTEM (PENS 2026)" textFill="#2c3e50">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Separator prefWidth="200.0" />
+
+      <!-- Bagian 1: Verifikasi Rekening (Proof of Funds) -->
+      <VBox spacing="10.0" style="-fx-background-color: white; -fx-padding: 15; -fx-border-color: #bdc3c7; -fx-border-radius: 5; -fx-background-radius: 5;">
+         <children>
+            <Label text="Langkah 1: Verifikasi Profil &amp; Proof of Funds" textFill="#34495e">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER_LEFT" spacing="15.0">
+               <children>
+                  <Label text="Nama KTP:" />
+                  <TextField fx:id="txtNama" prefWidth="200.0" promptText="Masukkan Nama Lengkap" />
+                  <Label text="Saldo Bank (Rp):" />
+                  <TextField fx:id="txtSaldo" prefWidth="200.0" promptText="Contoh: 1500000000" />
+                  <Button fx:id="btnVerifikasi" mnemonicParsing="false" onAction="#handleVerifikasi" style="-fx-background-color: #2980b9; -fx-text-fill: white; -fx-font-weight: bold;" text="Verifikasi &amp; Tentukan Tier" />
+               </children>
+            </HBox>
+            <Label fx:id="lblStatus" text="Status: Menunggu Verifikasi Rekening..." textFill="#c0392b">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <padding>
+                  <Insets top="5.0" />
+               </padding>
+            </Label>
+         </children>
+      </VBox>
+
+      <!-- Bagian 2: Main Content (Showroom & Garasi) -->
+      <HBox spacing="20.0" VBox.vgrow="ALWAYS">
+         <children>
+            <!-- Kolom Kiri: Katalog Showroom -->
+            <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label text="Katalog Kendaraan Showroom" textFill="#2c3e50">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <ListView fx:id="listShowroom" prefHeight="350.0" style="-fx-font-family: 'Consolas'; -fx-font-size: 13px;" VBox.vgrow="ALWAYS" />
+                  <HBox spacing="15.0">
+                     <children>
+                        <Button fx:id="btnTestDrive" disable="true" mnemonicParsing="false" onAction="#handleTestDrive" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #f39c12; -fx-text-fill: white; -fx-font-weight: bold;" text="🚙 Test Drive" />
+                        <Button fx:id="btnBeli" disable="true" mnemonicParsing="false" onAction="#handleBeli" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;" text="🛒 Beli (Autodebet)" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+
+            <!-- Kolom Kanan: Garasi Pribadi -->
+            <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label text="Garasi Pribadi Anda" textFill="#2c3e50">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <ListView fx:id="listGarasi" prefHeight="350.0" style="-fx-font-family: 'Consolas'; -fx-font-size: 13px; -fx-control-inner-background: #e8f8f5;" VBox.vgrow="ALWAYS" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</VBox>

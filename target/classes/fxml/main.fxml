@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="latihan.MainController">
+    <stylesheets>
+        <URL value="@/styles/main.css" />
+    </stylesheets>
+   <children>
+      <!-- fx:id="inputTeks" ditambahkan agar terhubung ke Controller -->
+      <TextField fx:id="inputTeks" layoutX="100.0" layoutY="99.0" promptText="Masukkan teks..." />
+      
+      <Label layoutX="23.0" layoutY="103.0" text="Input:" />
+      
+      <!-- fx:id="labelStatus" ditambahkan sebagai tempat teks hasil -->
+      <Label fx:id="labelStatus" layoutX="100.0" layoutY="140.0" text="..." textFill="#d32f2f" />
+      
+      <!-- onAction="#handleTombolKlik" ditambahkan agar tombol berfungsi -->
+      <Button layoutX="270.0" layoutY="99.0" mnemonicParsing="false" onAction="#handleTombolKlik" text="Search" />
+   </children>
+</AnchorPane>
