@@ -1,7 +1,51 @@
-/*
- * Empty Stylesheet file.
- */
+/* TEMA: ONYX BLACK & EMERALD GOLD */
+.root { -fx-background-color: #0b0f19; -fx-font-family: 'Segoe UI', 'Helvetica Neue', sans-serif; }
 
-.mainFxmlClass {
+.login-bg { -fx-background-color: linear-gradient(to bottom right, #05070a, #0b0f19, #111827); }
+.login-box { -fx-background-color: rgba(255, 255, 255, 0.02); -fx-border-color: rgba(255, 255, 255, 0.08); -fx-border-width: 1; -fx-border-radius: 12; -fx-background-radius: 12; -fx-padding: 45; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.9), 40, 0, 0, 20); }
 
-}
+.sidebar { -fx-background-color: #0d1321; -fx-border-color: transparent #1e293b transparent transparent; -fx-border-width: 1; }
+.nav-btn { -fx-background-color: transparent; -fx-text-fill: #64748b; -fx-font-size: 15px; -fx-font-weight: bold; -fx-alignment: center-left; -fx-padding: 16 30; -fx-cursor: hand; }
+.nav-btn:hover { -fx-background-color: #1e293b; -fx-text-fill: #38bdf8; }
+.nav-btn.active { -fx-background-color: #162032; -fx-text-fill: #38bdf8; -fx-border-color: transparent transparent transparent #38bdf8; -fx-border-width: 0 0 0 4; }
+
+.text-title { -fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #ffffff; }
+.text-subtitle { -fx-font-size: 14px; -fx-text-fill: #94a3b8; }
+.text-gold { -fx-text-fill: #fbbf24; -fx-font-weight: bold; }
+.text-accent { -fx-text-fill: #38bdf8; -fx-font-weight: bold; }
+
+.text-field, .combo-box { -fx-background-color: #162032; -fx-text-fill: #ffffff; -fx-border-color: #334155; -fx-border-radius: 6; -fx-padding: 10 15; -fx-font-size: 14px; }
+.text-field:focused, .combo-box:focused { -fx-border-color: #38bdf8; }
+.combo-box .list-cell { -fx-background-color: #162032; -fx-text-fill: white; }
+.combo-box-popup .list-view { -fx-background-color: #162032; -fx-border-color: #334155; }
+
+.scroll-pane { -fx-background-color: transparent; -fx-background: transparent; }
+.scroll-pane .viewport { -fx-background-color: transparent; }
+.car-card { -fx-background-color: #111827; -fx-background-radius: 12; -fx-border-color: #1e293b; -fx-border-radius: 12; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 15, 0, 0, 8); }
+.car-card:hover { -fx-border-color: #38bdf8; -fx-effect: dropshadow(three-pass-box, rgba(56, 189, 248, 0.2), 25, 0, 0, 0); -fx-translate-y: -4; }
+
+.car-img-ev { -fx-background-color: linear-gradient(to bottom right, #0284c7, #1e1b4b); -fx-background-radius: 10 10 0 0; -fx-min-height: 160; -fx-alignment: center; }
+.car-img-gas { -fx-background-color: linear-gradient(to bottom right, #991b1b, #450a0a); -fx-background-radius: 10 10 0 0; -fx-min-height: 160; -fx-alignment: center; }
+.car-img-owned { -fx-background-color: linear-gradient(to bottom right, #047857, #064e3b); -fx-background-radius: 10 10 0 0; -fx-min-height: 160; -fx-alignment: center; }
+
+.btn-primary { -fx-background-color: linear-gradient(to right, #0ea5e9, #0284c7); -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-cursor: hand; -fx-padding: 10 20; }
+.btn-primary:hover { -fx-effect: dropshadow(three-pass-box, rgba(14, 165, 233, 0.4), 15, 0, 0, 0); }
+.btn-danger { -fx-background-color: #ef4444; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-cursor: hand; }
+.btn-secondary { -fx-background-color: transparent; -fx-border-color: #475569; -fx-border-radius: 6; -fx-text-fill: #cbd5e1; -fx-cursor: hand; -fx-padding: 10 20; -fx-font-weight: bold; }
+.btn-secondary:hover { -fx-border-color: #38bdf8; -fx-text-fill: #38bdf8; }
+
+.list-view { -fx-background-color: transparent; -fx-control-inner-background: #111827; -fx-border-color: #1e293b; -fx-border-radius: 8; }
+.list-cell { -fx-text-fill: #e2e8f0; -fx-font-size: 14px; -fx-padding: 15; -fx-border-color: transparent transparent #1e293b transparent; -fx-border-width: 0 0 1 0; }
+.list-cell:selected { -fx-background-color: #1e293b; -fx-text-fill: #38bdf8; }
+
+.overlay-blur { -fx-background-color: rgba(5, 7, 10, 0.90); }
+.modal-box { -fx-background-color: #111827; -fx-padding: 40; -fx-background-radius: 12; -fx-border-color: #1e293b; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,1), 50, 0, 0, 10); }
+.toast { -fx-background-color: #10b981; -fx-background-radius: 8; -fx-padding: 15 25; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 15, 0, 0, 5); }
+.dashboard-box { -fx-background-color: #162032; -fx-padding: 20; -fx-background-radius: 10; -fx-border-color: #1e293b; }
+
+/* BAR CHART DARK THEME */
+.chart-bar { -fx-bar-fill: linear-gradient(to top, #0284c7, #38bdf8); }
+.chart-plot-background { -fx-background-color: transparent; }
+.chart-vertical-grid-lines, .chart-horizontal-grid-lines { -fx-stroke: #1e293b; }
+.axis-label { -fx-text-fill: #94a3b8; }
+.axis-tick-mark-text { -fx-fill: #cbd5e1; }

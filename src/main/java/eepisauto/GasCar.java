@@ -9,6 +9,6 @@ public class GasCar extends Vehicle {
         this.engineCapacity = engineCapacity;
         this.transmission = transmission;
     }
-    @Override public void testDrive() { System.out.println("[TEST DRIVE] VROOOM! Suara mesin " + engineCapacity + "cc menderu dari " + brand + " " + model); }
+    @Override public String testDrive() { return "VROOOM! Suara mesin " + engineCapacity + "cc menderu kencang!"; }
     @Override public String getSpecs() { return "Bahan Bakar Bensin | " + engineCapacity + "cc | " + transmission; }
 }
