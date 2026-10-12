@@ -6,148 +6,180 @@
 
 <!-- PERHATIKAN BARIS INI: fx:controller ada di ROOT component (StackPane) -->
 <StackPane fx:controller="eepisauto.PrimaryController" stylesheets="@../styles/main.css" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
-    
+
     <BorderPane fx:id="mainAppPane" opacity="0">
         <!-- SIDEBAR -->
         <left>
-            <VBox prefWidth="270.0" spacing="5.0" styleClass="sidebar">
-                <padding><Insets bottom="20" left="0" right="0" top="30"/></padding>
-                <Label alignment="CENTER" prefWidth="270.0" styleClass="text-title" text="EEPIS MOTORS">
-                    <VBox.margin><Insets bottom="30"/></VBox.margin>
-                </Label>
-                
-                <Button fx:id="btnNavShowroom" onAction="#navToShowroom" prefWidth="270.0" styleClass="nav-btn, active" text="🏎️  Katalog Showroom"/>
-                <Button fx:id="btnNavGarasi" onAction="#navToGarasi" prefWidth="270.0" styleClass="nav-btn" text="🛡️  Dasbor Portofolio"/>
-                <Button fx:id="btnNavServis" onAction="#navToServis" prefWidth="270.0" styleClass="nav-btn" text="🔧  Servis Center"/>
-                <Button fx:id="btnNavPajak" onAction="#navToPajak" prefWidth="270.0" styleClass="nav-btn" text="⚖️  Pajak &amp; Asuransi"/>
-                <Button fx:id="btnNavTradeIn" onAction="#navToTradeIn" prefWidth="270.0" styleClass="nav-btn" text="🤝  Trade-In (Jual)"/>
-                <Button fx:id="btnNavRiwayat" onAction="#navToRiwayat" prefWidth="270.0" styleClass="nav-btn" text="🧾  Log Transaksi"/>
-                <Button fx:id="btnNavRewards" onAction="#navToRewards" prefWidth="270.0" styleClass="nav-btn" text="🎁  VIP Lounge"/>
-                
+            <VBox prefWidth="250.0" spacing="4.0" styleClass="sidebar">
+                <padding><Insets bottom="20" left="16" right="16" top="24"/></padding>
+
+                <HBox alignment="CENTER_LEFT" spacing="12">
+                    <VBox.margin><Insets bottom="28" left="6"/></VBox.margin>
+                    <Label styleClass="brand-mark" text="E"/>
+                    <VBox>
+                        <Label styleClass="text-h2" text="EEPIS Motors"/>
+                        <Label styleClass="text-subtitle" style="-fx-font-size: 12px;" text="Dealer Terpadu"/>
+                    </VBox>
+                </HBox>
+
+                <Label styleClass="sidebar-section" text="MENU"/>
+                <Button fx:id="btnNavShowroom" onAction="#navToShowroom" maxWidth="Infinity" styleClass="nav-btn, active" text="Showroom"/>
+                <Button fx:id="btnNavGarasi" onAction="#navToGarasi" maxWidth="Infinity" styleClass="nav-btn" text="Portofolio"/>
+                <Button fx:id="btnNavServis" onAction="#navToServis" maxWidth="Infinity" styleClass="nav-btn" text="Servis"/>
+                <Button fx:id="btnNavPajak" onAction="#navToPajak" maxWidth="Infinity" styleClass="nav-btn" text="Pajak &amp; Asuransi"/>
+                <Button fx:id="btnNavTradeIn" onAction="#navToTradeIn" maxWidth="Infinity" styleClass="nav-btn" text="Trade-In"/>
+                <Button fx:id="btnNavRiwayat" onAction="#navToRiwayat" maxWidth="Infinity" styleClass="nav-btn" text="Riwayat"/>
+                <Button fx:id="btnNavRewards" onAction="#navToRewards" maxWidth="Infinity" styleClass="nav-btn" text="VIP Lounge"/>
+
                 <Region VBox.vgrow="ALWAYS"/>
-                <VBox spacing="8" style="-fx-padding: 25; -fx-background-color: #111827; -fx-border-color: #1e293b transparent transparent transparent;">
-                    <Label fx:id="lblSidebarUser" style="-fx-font-size: 16px; -fx-text-fill: white; -fx-font-weight: bold;" text="Nama Klien"/>
-                    <Label fx:id="lblSidebarTier" styleClass="text-gold" text="Tier VIP"/>
-                    <Label fx:id="lblSidebarSaldo" style="-fx-text-fill: #10b981; -fx-font-weight: bold; -fx-font-size: 14px;" text="Rp 0"/>
+
+                <VBox spacing="12" styleClass="profile-card">
+                    <HBox alignment="CENTER_LEFT" spacing="10">
+                        <Label fx:id="lblSidebarAvatar" styleClass="avatar" text="?"/>
+                        <VBox spacing="2">
+                            <Label fx:id="lblSidebarUser" styleClass="text-h2" style="-fx-font-size: 14px;" text="Nama Klien"/>
+                            <Label fx:id="lblSidebarTier" styleClass="pill" text="Tier"/>
+                        </VBox>
+                    </HBox>
+                    <VBox spacing="2">
+                        <Label styleClass="text-caption" text="SALDO"/>
+                        <Label fx:id="lblSidebarSaldo" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Rp 0"/>
+                    </VBox>
                 </VBox>
             </VBox>
         </left>
 
         <center>
-            <StackPane style="-fx-padding: 30;">
-                
+            <StackPane>
+                <padding><Insets top="32" right="36" bottom="28" left="36"/></padding>
+
                 <!-- PAGE 1: SHOWROOM -->
-                <VBox fx:id="pageShowroom" spacing="20.0">
-                    <HBox alignment="CENTER_LEFT" spacing="20">
-                        <VBox HBox.hgrow="ALWAYS">
-                            <Label styleClass="text-title" text="Katalog Eksklusif"/>
-                            <Label styleClass="text-subtitle" text="Implementasi Polimorfisme &amp; Interface OOP."/>
+                <VBox fx:id="pageShowroom" spacing="22.0">
+                    <HBox alignment="CENTER_LEFT" spacing="12">
+                        <VBox HBox.hgrow="ALWAYS" spacing="4">
+                            <Label styleClass="text-title" text="Showroom"/>
+                            <Label styleClass="text-subtitle" text="Pilih kendaraan, coba test drive, lalu beli."/>
                         </VBox>
-                        <TextField fx:id="txtSearch" prefWidth="280" promptText="🔍 Cari Model..."/>
+                        <TextField fx:id="txtSearch" prefWidth="260" promptText="Cari merek atau model"/>
                         <ComboBox fx:id="comboFilter" prefWidth="200"/>
                     </HBox>
                     <ScrollPane VBox.vgrow="ALWAYS" fitToWidth="true" styleClass="scroll-pane">
-                        <FlowPane fx:id="showroomContainer" hgap="30" vgap="30">
-                            <padding><Insets bottom="20" left="5" right="5" top="10"/></padding>
+                        <FlowPane fx:id="showroomContainer" hgap="20" vgap="20">
+                            <padding><Insets bottom="20" left="2" right="2" top="2"/></padding>
                         </FlowPane>
                     </ScrollPane>
                 </VBox>
 
-                <!-- PAGE 2: GARASI (DIROMBAK TOTAL JADI DASHBOARD WEALTH MANAGEMENT) -->
-                <VBox fx:id="pageGarasi" opacity="0" spacing="20.0" visible="false">
-                    <Label styleClass="text-title" text="Dasbor Portofolio Aset"/>
-                    
-                    <!-- Top Summary Bar -->
-                    <HBox alignment="CENTER_LEFT" spacing="20">
-                        <VBox HBox.hgrow="ALWAYS" alignment="CENTER" styleClass="dashboard-box">
-                            <Label styleClass="text-subtitle" text="Total Kendaraan"/>
-                            <Label fx:id="lblTotalUnit" style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: white;" text="0 Unit"/>
+                <!-- PAGE 2: GARASI / PORTOFOLIO -->
+                <VBox fx:id="pageGarasi" opacity="0" spacing="22.0" visible="false">
+                    <VBox spacing="4">
+                        <Label styleClass="text-title" text="Portofolio"/>
+                        <Label styleClass="text-subtitle" text="Ringkasan aset kendaraan yang Anda miliki."/>
+                    </VBox>
+
+                    <HBox spacing="16">
+                        <VBox HBox.hgrow="ALWAYS" spacing="6" styleClass="card">
+                            <Label styleClass="text-caption" text="TOTAL KENDARAAN"/>
+                            <Label fx:id="lblTotalUnit" styleClass="stat-value" text="0 Unit"/>
                         </VBox>
-                        <VBox HBox.hgrow="ALWAYS" alignment="CENTER" style="-fx-border-color: #047857;" styleClass="dashboard-box">
-                            <Label styleClass="text-subtitle" text="Total Nilai Aset Portofolio"/>
-                            <Label fx:id="lblTotalAset" style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #10b981;" text="Rp 0"/>
+                        <VBox HBox.hgrow="ALWAYS" spacing="6" styleClass="card">
+                            <Label styleClass="text-caption" text="NILAI ASET"/>
+                            <Label fx:id="lblTotalAset" styleClass="stat-value, text-success" text="Rp 0"/>
                         </VBox>
-                        <VBox HBox.hgrow="ALWAYS" alignment="CENTER" style="-fx-border-color: #991b1b;" styleClass="dashboard-box">
-                            <Label styleClass="text-subtitle" text="Beban Pajak PPN (11%)"/>
-                            <Label fx:id="lblSummaryPajak" style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #ef4444;" text="Rp 0"/>
+                        <VBox HBox.hgrow="ALWAYS" spacing="6" styleClass="card">
+                            <Label styleClass="text-caption" text="BEBAN PPN (11%)"/>
+                            <Label fx:id="lblSummaryPajak" styleClass="stat-value, text-danger" text="Rp 0"/>
                         </VBox>
                     </HBox>
 
-                    <!-- Bottom Content: Chart (Left) + Asset Cards (Right) -->
-                    <HBox VBox.vgrow="ALWAYS" spacing="20">
-                        <VBox prefWidth="500" styleClass="dashboard-box">
-                            <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" styleClass="text-accent" text="Distribusi Nilai Aset (Rp)"/>
-                            <BarChart VBox.vgrow="ALWAYS" fx:id="chartAset" legendVisible="false">
-                                <xAxis><CategoryAxis fx:id="xAxis" label="Model Kendaraan"/></xAxis>
+                    <HBox VBox.vgrow="ALWAYS" spacing="16">
+                        <VBox prefWidth="460" spacing="8" styleClass="card">
+                            <Label styleClass="text-h2" text="Distribusi Nilai Aset"/>
+                            <BarChart VBox.vgrow="ALWAYS" fx:id="chartAset" legendVisible="false" animated="false" verticalGridLinesVisible="false" alternativeRowFillVisible="false">
+                                <xAxis><CategoryAxis fx:id="xAxis"/></xAxis>
                                 <yAxis><NumberAxis fx:id="yAxis"/></yAxis>
                             </BarChart>
                         </VBox>
-                        <VBox HBox.hgrow="ALWAYS" spacing="15" styleClass="dashboard-box">
-                            <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" styleClass="text-accent" text="Sertifikat Kepemilikan (Garasi)"/>
+                        <VBox HBox.hgrow="ALWAYS" spacing="12" styleClass="card">
+                            <Label styleClass="text-h2" text="Garasi"/>
                             <ScrollPane VBox.vgrow="ALWAYS" fitToWidth="true" styleClass="scroll-pane">
-                                <VBox fx:id="garasiContainer" spacing="15">
-                                    <padding><Insets bottom="10" left="5" right="15" top="5"/></padding>
+                                <VBox fx:id="garasiContainer" spacing="10">
+                                    <padding><Insets bottom="4" left="0" right="8" top="0"/></padding>
                                 </VBox>
                             </ScrollPane>
                         </VBox>
                     </HBox>
                 </VBox>
-                
+
                 <!-- PAGE 3: SERVIS -->
-                <VBox fx:id="pageServis" opacity="0" spacing="25.0" visible="false">
-                    <Label styleClass="text-title" text="Pusat Servis Berkala"/>
-                    <Label styleClass="text-subtitle" text="OOP Encapsulation: Memotong saldo rekening secara aman."/>
-                    <HBox VBox.vgrow="ALWAYS" spacing="30">
+                <VBox fx:id="pageServis" opacity="0" spacing="22.0" visible="false">
+                    <VBox spacing="4">
+                        <Label styleClass="text-title" text="Servis Berkala"/>
+                        <Label styleClass="text-subtitle" text="Pilih kendaraan dari garasi untuk diservis. Biaya dipotong langsung dari saldo."/>
+                    </VBox>
+                    <HBox VBox.vgrow="ALWAYS" spacing="20">
                         <ListView HBox.hgrow="ALWAYS" fx:id="listServis"/>
-                        <VBox alignment="TOP_CENTER" prefWidth="380" spacing="20" styleClass="dashboard-box">
-                            <Label style="-fx-font-size: 18px;" styleClass="text-accent" text="Biaya Servis Resmi"/>
-                            <Label style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: white;" text="Rp 2.500.000"/>
-                            <Button onAction="#prosesServis" prefHeight="50" prefWidth="300" styleClass="btn-primary" text="Bayar &amp; Servis"/>
+                        <VBox prefWidth="340" spacing="14" styleClass="card" maxHeight="-Infinity">
+                            <Label styleClass="text-caption" text="BIAYA SERVIS RESMI"/>
+                            <Label styleClass="big-value" text="Rp 2.500.000"/>
+                            <Label styleClass="text-subtitle" wrapText="true" text="Termasuk ganti oli, inspeksi 40 titik, dan cuci kendaraan."/>
+                            <Button onAction="#prosesServis" maxWidth="Infinity" prefHeight="44" styleClass="btn-primary" text="Bayar &amp; Servis"/>
                         </VBox>
                     </HBox>
                 </VBox>
 
                 <!-- PAGE 4: PAJAK -->
-                <VBox fx:id="pagePajak" opacity="0" spacing="25.0" visible="false">
-                    <Label styleClass="text-title" text="Kalkulasi Pajak &amp; Asuransi"/>
-                    <Label styleClass="text-subtitle" text="Menggunakan ITaxable Interface untuk kalkulasi PPN/Pajak 11% tiap kendaraan."/>
-                    <HBox VBox.vgrow="ALWAYS" spacing="30">
-                        <ListView HBox.hgrow="ALWAYS" fx:id="listPajak" style="-fx-font-family: 'Consolas';"/>
-                        <VBox alignment="TOP_CENTER" prefWidth="380" spacing="20" styleClass="dashboard-box">
-                            <Label style="-fx-text-fill: #ef4444; -fx-font-weight: bold; -fx-font-size: 18px;" text="Total Beban Pajak"/>
-                            <Label fx:id="lblTotalPajak" style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: white;" text="Rp 0"/>
-                            <Label style="-fx-text-fill: #94a3b8; -fx-wrap-text: true; -fx-text-alignment: center;" text="Estimasi pajak yang harus dibayarkan ke negara berdasarkan aset garasi."/>
+                <VBox fx:id="pagePajak" opacity="0" spacing="22.0" visible="false">
+                    <VBox spacing="4">
+                        <Label styleClass="text-title" text="Pajak &amp; Asuransi"/>
+                        <Label styleClass="text-subtitle" text="PPN 11% per kendaraan, dihitung melalui interface ITaxable."/>
+                    </VBox>
+                    <HBox VBox.vgrow="ALWAYS" spacing="20">
+                        <ListView HBox.hgrow="ALWAYS" fx:id="listPajak" styleClass="mono"/>
+                        <VBox prefWidth="340" spacing="14" styleClass="card" maxHeight="-Infinity">
+                            <Label styleClass="text-caption" text="TOTAL BEBAN PAJAK"/>
+                            <Label fx:id="lblTotalPajak" styleClass="big-value, text-danger" text="Rp 0"/>
+                            <Label styleClass="text-subtitle" wrapText="true" text="Estimasi pajak yang dibayarkan ke negara berdasarkan aset di garasi."/>
                         </VBox>
                     </HBox>
                 </VBox>
 
                 <!-- PAGE 5: TRADE IN -->
-                <VBox fx:id="pageTradeIn" opacity="0" spacing="25.0" visible="false">
-                    <Label styleClass="text-title" text="Trade-In (Jual Kembali)"/>
-                    <Label styleClass="text-subtitle" text="Depresiasi 30%. Uang penjualan dikembalikan langsung ke Saldo (Encapsulation)."/>
-                    <HBox VBox.vgrow="ALWAYS" spacing="30">
+                <VBox fx:id="pageTradeIn" opacity="0" spacing="22.0" visible="false">
+                    <VBox spacing="4">
+                        <Label styleClass="text-title" text="Trade-In"/>
+                        <Label styleClass="text-subtitle" text="Jual kembali kendaraan (depresiasi 30%). Dana langsung masuk ke saldo."/>
+                    </VBox>
+                    <HBox VBox.vgrow="ALWAYS" spacing="20">
                         <ListView HBox.hgrow="ALWAYS" fx:id="listTradeIn"/>
-                        <VBox alignment="TOP_CENTER" prefWidth="380" spacing="20" styleClass="dashboard-box">
-                            <Label style="-fx-text-fill: #ef4444; -fx-font-weight: bold; -fx-font-size: 18px;" text="Estimasi Nilai Jual"/>
-                            <Label fx:id="lblHargaJual" style="-fx-font-size: 30px; -fx-font-weight: bold; -fx-text-fill: white;" text="Rp 0"/>
-                            <Button onAction="#prosesTradeIn" prefHeight="50" prefWidth="300" styleClass="btn-danger" text="Jual Kendaraan"/>
+                        <VBox prefWidth="340" spacing="14" styleClass="card" maxHeight="-Infinity">
+                            <Label styleClass="text-caption" text="ESTIMASI NILAI JUAL"/>
+                            <Label fx:id="lblHargaJual" styleClass="big-value" text="Rp 0"/>
+                            <Label styleClass="text-subtitle" wrapText="true" text="Pilih kendaraan di sebelah kiri untuk melihat estimasi."/>
+                            <Button onAction="#prosesTradeIn" maxWidth="Infinity" prefHeight="44" styleClass="btn-danger" text="Jual Kendaraan"/>
                         </VBox>
                     </HBox>
                 </VBox>
 
                 <!-- PAGE 6: RIWAYAT -->
-                <VBox fx:id="pageRiwayat" opacity="0" spacing="25.0" visible="false">
-                    <Label styleClass="text-title" text="Log Riwayat Transaksi"/>
-                    <ListView VBox.vgrow="ALWAYS" fx:id="listRiwayat" style="-fx-font-family: 'Consolas';"/>
+                <VBox fx:id="pageRiwayat" opacity="0" spacing="22.0" visible="false">
+                    <VBox spacing="4">
+                        <Label styleClass="text-title" text="Riwayat Transaksi"/>
+                        <Label styleClass="text-subtitle" text="Semua aktivitas akun Anda pada sesi ini."/>
+                    </VBox>
+                    <ListView VBox.vgrow="ALWAYS" fx:id="listRiwayat" styleClass="mono"/>
                 </VBox>
 
                 <!-- PAGE 7: VIP LOUNGE -->
-                <VBox alignment="CENTER" fx:id="pageRewards" opacity="0" spacing="25.0" visible="false">
-                    <VBox alignment="CENTER" maxWidth="550" spacing="30" styleClass="dashboard-box">
-                        <Label style="-fx-font-size: 35px;" styleClass="text-title" text="🎁 VIP Privilege Lounge"/>
-                        <Label styleClass="text-subtitle" text="Klaim bonus harian eksklusif berdasarkan Tier OOP Anda. (Hanya 1x Sehari)"/>
-                        <Label fx:id="lblTierReward" style="-fx-font-size: 20px;" styleClass="text-gold" text="Status: Belum Diklaim"/>
-                        <Button fx:id="btnKlaimReward" onAction="#klaimReward" prefHeight="60" prefWidth="400" style="-fx-font-size: 18px;" styleClass="btn-primary" text="KLAIM BONUS SEKARANG"/>
+                <VBox alignment="CENTER" fx:id="pageRewards" opacity="0" spacing="22.0" visible="false">
+                    <VBox alignment="CENTER" maxWidth="480" spacing="18" styleClass="card" style="-fx-padding: 40;">
+                        <Label styleClass="brand-mark" style="-fx-background-color: #f59e0b;" text="★"/>
+                        <Label styleClass="text-title" text="VIP Lounge"/>
+                        <Label styleClass="text-subtitle" wrapText="true" style="-fx-text-alignment: center;" text="Klaim bonus harian sesuai tier Anda. Hanya bisa diklaim sekali."/>
+                        <Label fx:id="lblTierReward" styleClass="pill" text="Status: Belum Diklaim"/>
+                        <Button fx:id="btnKlaimReward" onAction="#klaimReward" maxWidth="Infinity" prefHeight="48" styleClass="btn-primary" text="Klaim Bonus">
+                            <VBox.margin><Insets top="8"/></VBox.margin>
+                        </Button>
                     </VBox>
                 </VBox>
 
@@ -157,45 +189,97 @@
 
     <!-- LAYER LOGIN -->
     <StackPane fx:id="loginOverlay" styleClass="login-bg">
-        <VBox alignment="CENTER" maxWidth="480.0" spacing="20.0" styleClass="login-box">
-            <Label style="-fx-font-size: 34px; -fx-font-weight: bold; -fx-text-fill: white;" text="EEPIS MOTORS"/>
-            <VBox spacing="10">
-                <Label style="-fx-text-fill: #94a3b8; -fx-font-size: 12px; -fx-font-weight: bold;" text="NAMA IDENTITAS (KTP):"/>
-                <TextField fx:id="txtNama" promptText="Masukkan Nama Lengkap Anda"/>
+        <VBox maxWidth="420.0" maxHeight="-Infinity" spacing="18.0" styleClass="login-box">
+            <Label styleClass="brand-mark" text="E"/>
+            <VBox spacing="4">
+                <Label styleClass="text-title" text="Selamat datang"/>
+                <Label styleClass="text-subtitle" text="Masuk ke EEPIS Motors untuk mulai berbelanja."/>
             </VBox>
-            <VBox spacing="10">
-                <Label style="-fx-text-fill: #94a3b8; -fx-font-size: 12px; -fx-font-weight: bold;" text="PROOF OF FUNDS (SALDO):"/>
-                <TextField fx:id="txtSaldo" promptText="Contoh: 3000000000"/>
+            <VBox spacing="6">
+                <VBox.margin><Insets top="8"/></VBox.margin>
+                <Label styleClass="text-caption" text="NAMA LENGKAP"/>
+                <TextField fx:id="txtNama" promptText="Nama sesuai KTP"/>
             </VBox>
-            <Button onAction="#handleVerifikasi" prefHeight="50" prefWidth="480" styleClass="btn-primary" text="AUTENTIKASI &amp; MASUK">
-                <VBox.margin><Insets top="25"/></VBox.margin>
+            <VBox spacing="6">
+                <Label styleClass="text-caption" text="SALDO REKENING (RP)"/>
+                <TextField fx:id="txtSaldo" promptText="Contoh: 3000000000" onAction="#handleVerifikasi"/>
+                <Label styleClass="text-subtitle" style="-fx-font-size: 12px;" text="≥ 1 M = Silver · ≥ 3 M = Gold"/>
+            </VBox>
+            <Button onAction="#handleVerifikasi" maxWidth="Infinity" prefHeight="46" styleClass="btn-primary" text="Masuk">
+                <VBox.margin><Insets top="10"/></VBox.margin>
             </Button>
         </VBox>
     </StackPane>
 
-    <!-- LAYER ANIMASI MOBIL -->
-    <StackPane fx:id="animasiDriveOverlay" mouseTransparent="true" styleClass="overlay-blur" visible="false">
-        <Label fx:id="lblAnimasiMobil" style="-fx-font-size: 150px; -fx-effect: dropshadow(three-pass-box, #38bdf8, 50, 0.5, 0, 0);" text="🏎️💨"/>
-    </StackPane>
-
-    <!-- LAYER MODAL & FAKTUR -->
+    <!-- LAYER MODAL, FAKTUR & GAME -->
     <StackPane fx:id="modalOverlay" styleClass="overlay-blur" visible="false">
-        <VBox alignment="CENTER" fx:id="modalBox" maxWidth="450" spacing="25" styleClass="modal-box">
-            <Label fx:id="lblModalTitle" styleClass="text-title" text="Processing..."/>
-            <ProgressBar fx:id="progressBar" prefWidth="350" progress="0.0" style="-fx-accent: #38bdf8;"/>
-            <Label fx:id="lblModalDesc" style="-fx-font-size: 16px;" styleClass="text-subtitle" text="Mohon tunggu..."/>
-            <Button fx:id="btnCloseTestDrive" onAction="#closeModal" styleClass="btn-secondary" text="TUTUP" visible="false"/>
+        <VBox alignment="CENTER" fx:id="modalBox" maxWidth="420" maxHeight="-Infinity" spacing="18" styleClass="modal-box">
+            <Label fx:id="lblModalTitle" styleClass="text-h2" style="-fx-font-size: 18px;" text="Processing..."/>
+            <ProgressBar fx:id="progressBar" prefWidth="340" progress="0.0"/>
+            <Label fx:id="lblModalDesc" styleClass="text-subtitle" wrapText="true" text="Mohon tunggu..."/>
+            <Button fx:id="btnCloseTestDrive" onAction="#closeModal" styleClass="btn-secondary" text="Tutup" visible="false" managed="false"/>
         </VBox>
-        <VBox alignment="CENTER" fx:id="receiptBox" maxHeight="550" maxWidth="500" spacing="20" styleClass="modal-box" visible="false">
-            <Label style="-fx-font-size: 20px;" styleClass="text-accent" text="FAKTUR TRANSAKSI"/>
-            <TextArea VBox.vgrow="ALWAYS" editable="false" fx:id="txtReceiptContent" style="-fx-font-family: 'Consolas'; -fx-control-inner-background: #0b0f19; -fx-text-fill: #38bdf8;" wrapText="true"/>
-            <Button onAction="#closeModal" prefHeight="45" prefWidth="250" styleClass="btn-primary" text="TUTUP &amp; SIMPAN"/>
+
+        <VBox fx:id="receiptBox" maxHeight="560" maxWidth="500" spacing="16" styleClass="modal-box" visible="false">
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label styleClass="text-h2" style="-fx-font-size: 18px;" text="Faktur Transaksi"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label styleClass="pill, pill-success" text="BERHASIL"/>
+            </HBox>
+            <TextArea VBox.vgrow="ALWAYS" editable="false" fx:id="txtReceiptContent" styleClass="mono, receipt-area" wrapText="true"/>
+            <Button onAction="#closeModal" maxWidth="Infinity" prefHeight="44" styleClass="btn-primary" text="Selesai"/>
+        </VBox>
+
+        <!-- MINI GAME TEST DRIVE -->
+        <VBox fx:id="gameBox" maxWidth="-Infinity" maxHeight="-Infinity" styleClass="modal-box, game-box" visible="false">
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <VBox spacing="2" HBox.hgrow="ALWAYS">
+                    <Label fx:id="lblGameTitle" styleClass="text-h2" style="-fx-font-size: 18px;" text="Test Drive"/>
+                    <Label fx:id="lblGameSubtitle" styleClass="text-subtitle" style="-fx-font-size: 12px;" text=""/>
+                </VBox>
+                <Button onAction="#closeGame" styleClass="btn-ghost" text="Keluar  ✕"/>
+            </HBox>
+            <StackPane fx:id="gameHost">
+                <!-- Kartu hasil (ditampilkan setelah game selesai) -->
+                <StackPane fx:id="resultOverlay" styleClass="result-overlay" visible="false">
+                    <VBox fx:id="resultCard" alignment="CENTER" maxWidth="380" maxHeight="-Infinity" spacing="14" styleClass="result-card">
+                        <Label fx:id="lblResultTitle" styleClass="text-title" style="-fx-font-size: 22px;" text="Test Drive Selesai"/>
+                        <Label fx:id="lblResultQuote" styleClass="result-quote" wrapText="true" style="-fx-text-alignment: center;" text=""/>
+                        <HBox spacing="8" alignment="CENTER">
+                            <VBox styleClass="result-stat" alignment="CENTER" HBox.hgrow="ALWAYS">
+                                <Label styleClass="text-caption" text="SKOR"/>
+                                <Label fx:id="lblResultScore" styleClass="result-stat-value" text="0"/>
+                            </VBox>
+                            <VBox styleClass="result-stat" alignment="CENTER" HBox.hgrow="ALWAYS">
+                                <Label styleClass="text-caption" text="TOP SPEED"/>
+                                <Label fx:id="lblResultSpeed" styleClass="result-stat-value" text="0"/>
+                            </VBox>
+                            <VBox styleClass="result-stat" alignment="CENTER" HBox.hgrow="ALWAYS">
+                                <Label styleClass="text-caption" text="KOIN"/>
+                                <Label fx:id="lblResultCoins" styleClass="result-stat-value" text="0"/>
+                            </VBox>
+                        </HBox>
+                        <Label fx:id="lblResultBest" styleClass="text-subtitle" wrapText="true" style="-fx-font-size: 12px; -fx-text-alignment: center;" text=""/>
+                        <HBox spacing="10">
+                            <Button onAction="#retryGame" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="btn-secondary" text="Main Lagi"/>
+                            <Button fx:id="btnGameBuy" onAction="#buyFromGame" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="btn-primary" text="Beli Mobil Ini"/>
+                        </HBox>
+                    </VBox>
+                </StackPane>
+            </StackPane>
+            <HBox alignment="CENTER" spacing="6">
+                <Label styleClass="kbd" text="←"/>
+                <Label styleClass="kbd" text="→"/>
+                <Label styleClass="game-hint" text="pindah jalur   ·  "/>
+                <Label styleClass="kbd" text="Esc"/>
+                <Label styleClass="game-hint" text="keluar   ·   klik kiri/kanan arena juga bisa"/>
+            </HBox>
         </VBox>
     </StackPane>
 
-    <!-- TOAST ALARM -->
-    <HBox StackPane.alignment="TOP_CENTER" alignment="CENTER" fx:id="toastPane" maxHeight="60" maxWidth="450" styleClass="toast" translateY="-100">
-        <StackPane.margin><Insets top="30"/></StackPane.margin>
-        <Label fx:id="lblToast" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 15px;" text="Notifikasi"/>
+    <!-- TOAST -->
+    <HBox StackPane.alignment="TOP_RIGHT" alignment="CENTER_LEFT" fx:id="toastPane" maxHeight="-Infinity" maxWidth="-Infinity" styleClass="toast" translateY="-120" mouseTransparent="true">
+        <StackPane.margin><Insets top="24" right="36"/></StackPane.margin>
+        <Label fx:id="lblToast" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px;" text="Notifikasi"/>
     </HBox>
 </StackPane>
