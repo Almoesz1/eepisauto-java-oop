@@ -1,7 +1,27 @@
 package eepisauto;
 
+/**
+ * Kelas utilitas untuk memformat dan mencetak faktur bukti transaksi resmi EEPIS Auto VIP.
+ * <p>
+ * Menghasilkan rincian komprehensif mulai dari data pelanggan, spesifikasi kendaraan,
+ * kalkulasi harga OTR, diskon tier, beban PPN 11%, bonus reward, dan sisa saldo akhir.
+ *
+ * @author Kelompok 3 (Mustofa Barakbah &amp; Reza Ali Muhammad)
+ * @version 2.0
+ */
 public class TransactionReceipt {
-    // Tambahkan parameter String bonus di akhir
+
+    /**
+     * Menghasilkan teks faktur transaksi pembelian yang rapi dan terstruktur.
+     *
+     * @param customer objek pelanggan yang melakukan transaksi
+     * @param vehicle objek kendaraan yang dibeli
+     * @param finalPrice total harga akhir yang telah dibayarkan
+     * @param discount nilai potongan diskon tier
+     * @param tax nilai beban PPN 11%
+     * @param bonus rincian bonus hadiah yang didapatkan
+     * @return string struk faktur pembelian
+     */
     public static String generateReceipt(Customer customer, Vehicle vehicle, double finalPrice, double discount, double tax, String bonus) {
         StringBuilder sb = new StringBuilder();
         sb.append("=======================================================\n");

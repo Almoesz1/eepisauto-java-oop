@@ -15,6 +15,26 @@ import javafx.scene.effect.BoxBlur;
 import javafx.scene.layout.*;
 import javafx.util.Duration;
 
+/**
+ * Controller utama (Orchestrator) dalam arsitektur Model-View-Controller (MVC)
+ * untuk sistem EEPIS Auto VIP Dealership.
+ * <p>
+ * Mengelola interaksi pengguna pada 7 modul antarmuka:
+ * <ul>
+ *   <li>Katalog Showroom dengan Java Stream API filtering dinamis</li>
+ *   <li>Dasbor Portofolio Aset dengan grafik batang {@link BarChart} dan sertifikat kepemilikan</li>
+ *   <li>Pusat Servis Berkala Resmi dengan autodebet aman terenkapsulasi</li>
+ *   <li>Modul Pajak &amp; Asuransi yang menerapkan kontrak {@link ITaxable}</li>
+ *   <li>Modul Trade-In (penjualan kembali dengan depresiasi 30%)</li>
+ *   <li>Log Riwayat Finansial / Audit Trail</li>
+ *   <li>VIP Privilege Lounge untuk klaim reward tier pelanggan</li>
+ * </ul>
+ * Selain itu, controller ini juga mengintegrasikan mini-game simulasi {@link TestDriveGame}
+ * berbasis JavaFX Canvas 60 FPS untuk menguji kendaraan secara interaktif.
+ *
+ * @author Kelompok 3 (Mustofa Barakbah &amp; Reza Ali Muhammad)
+ * @version 2.0
+ */
 public class PrimaryController {
 
     @FXML private BorderPane mainAppPane;
