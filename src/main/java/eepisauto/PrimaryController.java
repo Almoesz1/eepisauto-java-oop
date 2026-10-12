@@ -19,14 +19,16 @@ public class PrimaryController {
     @FXML private TextField txtNama, txtSaldo, txtSearch;
     @FXML private ComboBox<String> comboFilter;
     
-    // 7 Sidebar & Pages
+    // Sidebar & Pages
     @FXML private Button btnNavShowroom, btnNavGarasi, btnNavServis, btnNavPajak, btnNavTradeIn, btnNavRiwayat, btnNavRewards;
     @FXML private VBox pageShowroom, pageGarasi, pageServis, pagePajak, pageTradeIn, pageRiwayat, pageRewards;
     
     // UI Elements
     @FXML private Label lblSidebarUser, lblSidebarTier, lblSidebarSaldo;
-    @FXML private Label lblTotalAset, lblHargaJual, lblTotalPajak, lblTierReward, lblAnimasiMobil;
-    @FXML private FlowPane showroomContainer, garasiContainer;
+    @FXML private Label lblTotalUnit, lblTotalAset, lblSummaryPajak; // Summary Garasi Baru
+    @FXML private Label lblHargaJual, lblTotalPajak, lblTierReward, lblAnimasiMobil;
+    @FXML private FlowPane showroomContainer;
+    @FXML private VBox garasiContainer; // Diubah jadi VBox untuk list vertical mewah
     @FXML private ListView<String> listServis, listPajak, listTradeIn, listRiwayat;
     @FXML private Button btnKlaimReward;
     
@@ -45,8 +47,6 @@ public class PrimaryController {
     private ArrayList<Vehicle> showroom = new ArrayList<>();
     private Customer currentUser;
     private List<String> transactionHistory = new ArrayList<>();
-    
-    // BUG FIX: Kunci Reward agar tidak dieksploitasi
     private boolean hasClaimedReward = false; 
 
     @FXML
@@ -153,28 +153,34 @@ public class PrimaryController {
         }
     }
 
+    // RENDER GARASI YANG DIROMBAK JADI SERTIFIKAT MEWAH
     private void renderGarasiCards() {
         garasiContainer.getChildren().clear();
+        int counter = 1;
         for (Vehicle car : currentUser.garage) {
-            VBox card = new VBox(10);
-            card.getStyleClass().add("car-card");
-            card.setPrefWidth(240);
+            HBox card = new HBox(20);
+            card.getStyleClass().add("asset-card");
             
-            StackPane imagePane = new StackPane();
-            imagePane.getStyleClass().add("car-img-owned");
-            Label icon = new Label("✅ LUNAS");
-            icon.setStyle("-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: white;");
-            imagePane.getChildren().add(icon);
-
-            VBox textPane = new VBox(8);
-            textPane.setPadding(new javafx.geometry.Insets(15));
+            Label noLabel = new Label(String.format("#%02d", counter++));
+            noLabel.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #047857; -fx-opacity: 0.5;");
+            
+            VBox infoBox = new VBox(5);
+            HBox.setHgrow(infoBox, Priority.ALWAYS);
             Label title = new Label(car.getBrand() + " " + car.getModel());
-            title.setStyle("-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white;");
-            Label price = new Label("Aset: Rp " + String.format("%,.0f", car.getPrice()));
-            price.setStyle("-fx-text-fill: #10b981; -fx-font-size: 13px;");
-            textPane.getChildren().addAll(title, price);
+            title.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white;");
+            Label specs = new Label(car.getSpecs() + " | Warna: " + car.getColor());
+            specs.setStyle("-fx-text-fill: #94a3b8; -fx-font-size: 13px;");
+            infoBox.getChildren().addAll(title, specs);
+            
+            VBox priceBox = new VBox(5);
+            priceBox.setAlignment(javafx.geometry.Pos.CENTER_RIGHT);
+            Label status = new Label("✅ LUNAS");
+            status.setStyle("-fx-font-weight: bold; -fx-text-fill: #10b981; -fx-font-size: 12px;");
+            Label price = new Label("Rp " + String.format("%,.0f", car.getPrice()));
+            price.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white;");
+            priceBox.getChildren().addAll(status, price);
 
-            card.getChildren().addAll(imagePane, textPane);
+            card.getChildren().addAll(noLabel, infoBox, priceBox);
             garasiContainer.getChildren().add(card);
         }
     }
@@ -183,15 +189,15 @@ public class PrimaryController {
         mainAppPane.setEffect(new BoxBlur(20, 20, 3));
         animasiDriveOverlay.setVisible(true);
         lblAnimasiMobil.setText(car instanceof ElectricCar ? "⚡🚙" : "🏎️💨");
-        lblAnimasiMobil.setTranslateX(-900); 
+        lblAnimasiMobil.setTranslateX(-1000); 
 
         TranslateTransition driveAnim = new TranslateTransition(Duration.seconds(1.2), lblAnimasiMobil);
-        driveAnim.setToX(900); driveAnim.setInterpolator(Interpolator.EASE_IN);
+        driveAnim.setToX(1000); driveAnim.setInterpolator(Interpolator.EASE_IN);
         driveAnim.setOnFinished(e -> {
             animasiDriveOverlay.setVisible(false);
             modalOverlay.setVisible(true); modalBox.setVisible(true); receiptBox.setVisible(false);
             lblModalTitle.setText("Hasil Test Drive: " + car.getModel());
-            lblModalDesc.setText(car.testDrive());
+            lblModalDesc.setText(car.testDrive()); // POLIMORFISME
             lblModalDesc.setStyle("-fx-text-fill: #38bdf8; -fx-font-weight: bold; -fx-font-size: 22px;");
             progressBar.setVisible(false); btnCloseTestDrive.setVisible(true);
         });
@@ -201,6 +207,7 @@ public class PrimaryController {
     private void triggerBeli(Vehicle car) {
         showModalAnimasi("Koneksi Bank & Validasi Saldo...", "Memproses Pembelian", () -> {
             try {
+                // ENCAPSULATION & EXCEPTION HANDLING
                 String receipt = currentUser.buyVehicle(car);
                 transactionHistory.add("PEMBELIAN: " + car.getBrand() + " " + car.getModel());
                 updateSemuaData();
@@ -242,7 +249,6 @@ public class PrimaryController {
             showToast("Anda sudah mengklaim bonus hari ini!", true);
             return;
         }
-
         double bonus = 0;
         if (currentUser instanceof GoldCustomer) bonus = 50000000.0;
         else if (currentUser instanceof SilverCustomer) bonus = 10000000.0;
@@ -252,18 +258,12 @@ public class PrimaryController {
         transactionHistory.add("KLAIM VIP BONUS (+Rp " + String.format("%,.0f", bonus) + ")");
         lblTierReward.setText("Status: Sudah Diklaim (Rp " + String.format("%,.0f", bonus) + ")");
         
-        // Kunci tombol agar tidak dieksploitasi lagi
-        hasClaimedReward = true;
-        btnKlaimReward.setDisable(true);
-        btnKlaimReward.setText("REWARD SUDAH DIAMBIL");
-        
-        updateSemuaData();
-        showToast("Bonus VIP berhasil ditambahkan ke saldo!", false);
+        hasClaimedReward = true; btnKlaimReward.setDisable(true); btnKlaimReward.setText("REWARD SUDAH DIAMBIL");
+        updateSemuaData(); showToast("Bonus VIP berhasil ditambahkan ke saldo!", false);
     }
 
     @FXML private void closeModal() { modalOverlay.setVisible(false); mainAppPane.setEffect(null); btnCloseTestDrive.setVisible(false); progressBar.setVisible(true); }
 
-    // --- NAVIGASI MULTI PAGE 7 MENU ---
     @FXML private void navToShowroom() { switchPage(pageShowroom, btnNavShowroom); }
     @FXML private void navToGarasi() { switchPage(pageGarasi, btnNavGarasi); }
     @FXML private void navToServis() { switchPage(pageServis, btnNavServis); }
@@ -283,8 +283,7 @@ public class PrimaryController {
                 ft.setToValue(1); ft.play();
                 allBtns[i].getStyleClass().add("active");
             } else {
-                allPages[i].setVisible(false);
-                allBtns[i].getStyleClass().remove("active");
+                allPages[i].setVisible(false); allBtns[i].getStyleClass().remove("active");
             }
         }
     }
@@ -303,25 +302,30 @@ public class PrimaryController {
         lblSidebarTier.setText("👑 " + currentUser.getTierName());
         lblSidebarSaldo.setText("Rp " + String.format("%,.0f", currentUser.getBankBalance()));
 
-        renderShowroomCards(); renderGarasiCards();
+        renderShowroomCards(); 
+        renderGarasiCards();
 
-        // 1. UPDATE BAR CHART
+        // 1. UPDATE BAR CHART & GARASI SUMMARY
         double totalAset = 0;
+        double totalPajak = 0;
         chartAset.getData().clear();
         XYChart.Series<String, Number> series = new XYChart.Series<>();
+        
         for (Vehicle v : currentUser.garage) { 
             totalAset += v.getPrice(); 
+            totalPajak += v.calculateTax(v.getPrice()); // ITaxable Interface
             series.getData().add(new XYChart.Data<>(v.getModel(), v.getPrice()));
         }
         chartAset.getData().add(series);
+        
+        lblTotalUnit.setText(currentUser.garage.size() + " Unit");
         lblTotalAset.setText("Rp " + String.format("%,.0f", totalAset));
+        lblSummaryPajak.setText("Rp " + String.format("%,.0f", totalPajak));
 
-        // 2. UPDATE MENU PAJAK (Implementasi ITaxable Interface)
+        // 2. UPDATE MENU PAJAK
         listPajak.getItems().clear();
-        double totalPajak = 0;
         for (Vehicle v : currentUser.garage) {
-            double pajakMobil = v.calculateTax(v.getPrice()); // Memanggil fungsi Interface
-            totalPajak += pajakMobil;
+            double pajakMobil = v.calculateTax(v.getPrice());
             listPajak.getItems().add(String.format("PPN 11%% | %-15s : Rp %,.0f", v.getModel(), pajakMobil));
         }
         lblTotalPajak.setText("Rp " + String.format("%,.0f", totalPajak));
